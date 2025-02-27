@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import AppBar from "@/components/widget/AppBar";
+import Footer from "@/components/widget/Footer";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: {
-    template: "%s | FarmAI",
-    default: "FarmAI - AI for Agriculture",
-  },
-  description: "FarmAI is an AI platform for agriculture.",
+  title: "Farmai",
+  description: "ai in code",
 };
 
 export default function RootLayout({
@@ -16,7 +26,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-[100dvh]`}
+      >
+        <div className="flex min-h-screen justify-center w-full overflow-x-hidden flex-col">
+          <AppBar />
+          {children}
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }
